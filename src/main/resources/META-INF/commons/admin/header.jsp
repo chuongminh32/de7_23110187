@@ -24,8 +24,9 @@
 				<li class="nav-item"><a class="nav-link"
 					href="${pageContext.request.contextPath}/admin/video/list">Video</a>
 				</li>
+				
 				<li class="nav-item"><a class="nav-link"
-					href="${pageContext.request.contextPath}/admin/user/list">User</a>
+					href="${pageContext.request.contextPath}/admin/video/by-category">VideoByCategory</a>
 				</li>
 			</ul>
 

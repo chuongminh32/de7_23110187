@@ -32,4 +32,6 @@ public interface CategoryService_23110187 {
 
     // Tìm category theo User (có phân trang)
     Page<Category_23110187> findByUser(Users_23110187 user, int page, int size);
+    
+    List<Category_23110187> findAllCategoriesWithVideos();
 }

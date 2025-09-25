@@ -1,8 +1,9 @@
 package vn.iotstar.controller.admin;
 
+import vn.iotstar.Services.CategoryService_23110187;
 import vn.iotstar.Services.VideoService_23110187;
-import vn.iotstar.entity.Video_23110187;
 import vn.iotstar.entity.Category_23110187;
+import vn.iotstar.entity.Video_23110187;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -21,16 +23,18 @@ public class AdminVideoController_23110187 {
 
     @Autowired
     private VideoService_23110187 videoService;
+    @Autowired
+    private CategoryService_23110187 categoryService;
 
     private static final String UPLOAD_DIR = "G:\\uploads";
 
-    // 👉 Redirect khi vào /admin/video → /admin/video/list
+    //  Redirect khi vào /admin/video → /admin/video/list
     @GetMapping("")
     public String redirectToList() {
         return "redirect:/admin/video/list";
     }
 
-    // 👉 Hiển thị danh sách Video (có phân trang + tìm kiếm)
+    //  Hiển thị danh sách Video (có phân trang + tìm kiếm)
     @GetMapping("/list")
     public String listVideos(@RequestParam(defaultValue = "0") int page,
                              @RequestParam(defaultValue = "6") int size,
@@ -54,14 +58,14 @@ public class AdminVideoController_23110187 {
         return "admin/videolist"; // sẽ render file /WEB-INF/views/admin/videolist.jsp
     }
 
-    // 👉 Hiển thị form thêm mới Video
+    //  Hiển thị form thêm mới Video
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("video", new Video_23110187());
         return "admin/videoform"; // /WEB-INF/views/admin/videoform.jsp
     }
 
-    // 👉 Hiển thị form sửa Video
+    //  Hiển thị form sửa Video
     @GetMapping("/edit")
     public String editForm(@RequestParam String videoId, Model model) {
         Video_23110187 v = videoService.findById(videoId)
@@ -70,7 +74,7 @@ public class AdminVideoController_23110187 {
         return "admin/videoform";
     }
 
-    // 👉 Lưu Video (thêm mới hoặc update)
+    //  Lưu Video (thêm mới hoặc update)
     @PostMapping("/save")
     public String saveVideo(@RequestParam(required = false) String videoId,
                             @RequestParam String title,
@@ -103,15 +107,22 @@ public class AdminVideoController_23110187 {
             v.setPoster(fileName);
         }
 
-        // 👉 Có thể gán Category nếu cần
+        // Có thể gán Category nếu cần
         // v.setCategory(categoryService.findById(categoryId).orElse(null));
 
         videoService.save(v);
 
         return "redirect:/admin/video/list";
     }
+    
+    @GetMapping("/by-category")
+    public String videosByCategory(Model model) {
+        List<Category_23110187> categories = categoryService.findAllCategoriesWithVideos();
+        model.addAttribute("categories", categories);
+        return "admin/videos-by-category";
+    }
 
-    // 👉 Xóa Video theo id
+    //  Xóa Video theo id
     @GetMapping("/delete")
     public String deleteVideo(@RequestParam String videoId) {
         videoService.deleteById(videoId);

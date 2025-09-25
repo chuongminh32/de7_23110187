@@ -57,4 +57,10 @@ public class CategoryServiceImpl_23110187 implements CategoryService_23110187 {
     public Page<Category_23110187> findByUser(Users_23110187 user, int page, int size) {
         return categoryRepository.findByUser(user, PageRequest.of(page, size));
     }
+    
+    @Override
+    public List<Category_23110187> findAllCategoriesWithVideos() {
+        // @EntityGraph trong repository đã load luôn videos
+        return categoryRepository.findAll();
+    }
 }

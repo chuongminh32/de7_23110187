@@ -16,7 +16,7 @@ import java.io.IOException;
 
 @Controller
 @RequestMapping("/admin/category")
-public class CategoryAdminController_23110187 {
+public class AdminCategoryController_23110187 {
 
     @Autowired
     private CategoryService_23110187 categoryService;
