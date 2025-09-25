@@ -11,14 +11,10 @@
 
     <!-- Header -->
     <%@ include file="/commons/admin/header.jsp" %>
-
-    <!-- Nội dung trang con -->
-    <main class="flex-fill">
-        <div class="container py-4">
-            ${page.body}
-        </div>
-    </main>
-
+		<! -- body -- >
+		<sitemesh:write property="body"/>
+		<! -- body -- >
+		  
     <!-- Footer -->
     <%@ include file="/commons/admin/footer.jsp" %>
 

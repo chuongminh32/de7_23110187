@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>${page.title}</title>
-    ${page.head}
-
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -20,14 +18,10 @@
     <!-- Header -->
     <%@ include file="/commons/user/header.jsp" %>
 
-    <!-- Main Content -->
-    <main class="flex-fill">
-        <div class="container py-4">
-            ${page.body}
-          
-        </div>
-    </main>
-
+		<! -- body -- >
+		<sitemesh:write property="body"/>
+		<! -- body -- >
+		  
     <!-- Footer -->
     <%@ include file="/commons/user/footer.jsp" %>
 

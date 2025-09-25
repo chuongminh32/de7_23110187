@@ -21,14 +21,10 @@
     <!-- Header -->
     <%@ include file="/commons/user/header.jsp" %>
 
-    <!-- Main Content -->
-    <main class="flex-fill">
-        <div class="container py-4">
-            ${page.body}
-            
-        </div>
-    </main>
-
+		<! -- body -- >
+		<sitemesh:write property="body"/>
+		<! -- body -- >
+		  
     <!-- Footer -->
     <%@ include file="/commons/user/footer.jsp" %>
 
